@@ -1,0 +1,6 @@
+name: chapter_4_stacks
+description: A sample command-line application.
+version: 1.0.0
+
+environment:
+  sdk: ^3.10.4
