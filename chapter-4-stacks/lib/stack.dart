@@ -1,9 +1,11 @@
 class Stack<T> {
-  final List<T> _elements = [];
+  Stack() : _elements = [];
 
-  void push(T item) {
-    _elements.add(item);
-  }
+  Stack.of(List<T> elements) : _elements = List<T>.of(elements);
+
+  final List<T> _elements;
+
+  void push(T item) => _elements.add(item);
 
   T? pop() {
     if (isEmpty) return null;
