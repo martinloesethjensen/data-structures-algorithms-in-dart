@@ -32,9 +32,19 @@ void challenge2(LinkedList list) {
 
 class ReversedLinkedList<E> extends LinkedList<E> {
   void reverse() {
-    final list = LinkedList<E>();
-    forEach(list.push);
-    head = list.head;
+    tail = head;
+    var previous = head;
+    var current = head?.next;
+    previous?.next = null;
+
+    while (current != null) {
+      final next = current.next;
+      current.next = previous;
+      previous = current;
+      current = next;
+    }
+
+    head = previous;
   }
 }
 
