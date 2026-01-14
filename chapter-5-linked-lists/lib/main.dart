@@ -1,14 +1,54 @@
 import 'package:chapter_5_linked_lists/linked_list.dart';
 
+void printRecursively<T>(Node<T>? node) {
+  if (node == null) return;
+
+  if (node.next == null) return;
+
+  printRecursively(node.next);
+
+  print(node.value);
+}
+
 // Create a function that prints the nodes of a linked list in reverse order.
 void challenge1(LinkedList list) {
-  while (list.isNotEmpty) {
-    print(list.removeLast());
+  printRecursively(list.head);
+}
+
+Node<E>? middleNode<E>(LinkedList<E> list) {
+  var slow = list.head;
+  var fast = list.head;
+  while (fast?.next != null) {
+    fast = fast?.next?.next;
+    slow = slow?.next;
+  }
+  return slow;
+}
+
+// Create a function that finds the middle node of a linked list
+void challenge2(LinkedList list) {
+  print(middleNode(list)?.value);
+}
+
+class ReversedLinkedList<E> extends LinkedList<E> {
+  void reverse() {
+    final list = LinkedList<E>();
+    forEach(list.push);
+    head = list.head;
   }
 }
 
+// Create a function that reverses a linked list. You do this by manipulating the nodes
+// so that they’re linked in the other direction.
+void challenge3(LinkedList list) {
+  final reversedLinked = ReversedLinkedList();
+  list.forEach(reversedLinked.push);
+  reversedLinked.reverse();
+  print(reversedLinked);
+}
+
 //
-void challenge2() {}
+void challenge4() {}
 
 void main() {
   final node1 = Node(value: 1);
@@ -51,7 +91,12 @@ void main() {
   list.forEach(print);
 
   print('---- challenges ----');
-  final temp = list;
-  challenge1(temp);
-  challenge2();
+  print('CHALLENGE 1');
+  challenge1(list);
+  print('CHALLENGE 2');
+  challenge2(list);
+  print('CHALLENGE 3');
+  challenge3(list);
+  print('CHALLENGE 4');
+  challenge4();
 }
