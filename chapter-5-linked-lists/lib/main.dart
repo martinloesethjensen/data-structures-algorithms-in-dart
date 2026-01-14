@@ -57,8 +57,42 @@ void challenge3(LinkedList list) {
   print(reversedLinked);
 }
 
-//
-void challenge4() {}
+extension LinkedListExt<E> on LinkedList<E> {
+  void removeAll(E value) {
+    while (head != null && head?.next == value) {
+      head = head?.next;
+    }
+
+    var previous = head;
+    var current = head?.next;
+
+    while (current != null) {
+      if (current.value == value) {
+        previous?.next = current.next;
+        current = previous?.next;
+        continue;
+      }
+      previous = current;
+      current = current.next;
+      tail = previous;
+    }
+  }
+}
+
+// Create a function that removes all occurrences of a specific element from a linked
+// list. The implementation is similar to the removeAfter method that you
+// implemented earlier.
+void challenge4() {
+  LinkedList()
+    ..append(1)
+    ..append(3)
+    ..append(3)
+    ..append(2)
+    ..append(3)
+    ..append(4)
+    ..removeAll(3)
+    ..forEach(print);
+}
 
 void main() {
   final node1 = Node(value: 1);
