@@ -9,4 +9,13 @@ void main() {
   queue.dequeue();
   print(queue);
   print(queue.peek);
+
+  final queueLinked = QueueLinkedList<String>();
+  queueLinked.enqueue('Ray');
+  queueLinked.enqueue('Brian');
+  queueLinked.enqueue('Eric');
+  print(queueLinked); // [Ray, Brian, Eric]
+  queueLinked.dequeue();
+  print(queueLinked); // [Brian, Eric]
+  print(queueLinked.peek); // Brian
 }
