@@ -18,4 +18,13 @@ void main() {
   queueLinked.dequeue();
   print(queueLinked); // [Brian, Eric]
   print(queueLinked.peek); // Brian
+
+  final queueRingBuffer = QueueRingBuffer<String>(10);
+  queueRingBuffer.enqueue("Ray");
+  queueRingBuffer.enqueue("Brian");
+  queueRingBuffer.enqueue("Eric");
+  print(queueRingBuffer); // [Ray, Brian, Eric]
+  queueRingBuffer.dequeue();
+  print(queueRingBuffer); // [Brian, Eric]
+  print(queueRingBuffer.peek); // Brian
 }
