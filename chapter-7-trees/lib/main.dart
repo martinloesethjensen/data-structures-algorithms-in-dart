@@ -3,6 +3,12 @@ import 'package:chapter_7_trees/tree.dart';
 void main() {
   final tree = makeBeverageTree();
   tree.forEachDepthFirst((node) => print(node.value));
+  tree.forEachLevelOrder((node) => print(node.value));
+
+  final searchResult1 = tree.search('ginger ale');
+  print(searchResult1?.value); // ginger ale
+  final searchResult2 = tree.search('water');
+  print(searchResult2?.value); // null
 }
 
 TreeNode<String> makeBeverageTree() {

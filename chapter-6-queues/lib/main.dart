@@ -1,5 +1,5 @@
 import 'package:chapter_6_queues/queue.dart';
-import 'package:common/common.dart';
+import 'package:common/common.dart' show DoublyLinkedList;
 
 extension BoardGameManager<E> on QueueRingBuffer {
   E? nextPlayer() {
