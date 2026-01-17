@@ -1,6 +1,11 @@
 name: chapter_7_trees
 description: A sample command-line application.
 version: 1.0.0
+publish_to: none
 
 environment:
   sdk: ^3.10.7
+
+dependencies:
+  common:
+    path: ../common
