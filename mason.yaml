@@ -1,3 +1,3 @@
 bricks:
   dart_project:
-    path: dart_project
+    path: bricks/dart_project
