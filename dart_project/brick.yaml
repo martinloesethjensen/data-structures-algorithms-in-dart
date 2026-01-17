@@ -1,0 +1,13 @@
+name: dart_project
+description: A simple barebone Dart project template
+version: 0.1.0+1
+
+environment:
+  mason: ^0.1.2
+
+vars:
+  project_name:
+    type: string
+    description: The name of your Dart project
+    default: my_dart_app
+    prompt: What is the project name?
