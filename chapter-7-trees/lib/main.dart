@@ -12,6 +12,8 @@ void main() {
 
   print('\n--- Challenges ---');
   challenge1();
+  // Challenge 2
+  buildWidgetTree();
 }
 
 TreeNode<String> makeBeverageTree() {
@@ -43,6 +45,10 @@ TreeNode<String> makeBeverageTree() {
   return tree;
 }
 
+// Challenge 1
+//
+// Print all the values in a tree in order based on their level. Nodes in the same level
+// should be printed on the same line.
 void challenge1() {
   final one = TreeNode(1)
     ..add(TreeNode(1))
@@ -59,4 +65,44 @@ void challenge1() {
   root
       .getChildrenAsListInLevels(root)
       .forEach((list) => print(list.map((e) => e.value).join(' ')));
+}
+
+// Challenge 2
+//
+// Flutter calls the nodes in its user-facing UI tree widgets. You can make a mini-
+// version of the same thing.
+// Create three separate nodes with the following names and types:
+// • Column: a tree node that takes multiple children.
+// • Padding: a tree node that takes a single child.
+// • Text: a tree leaf node.
+// Use your widget nodes to build a simple widget tree.
+class Widget {}
+
+class Column extends Widget {
+  Column({required this.children});
+
+  final List<Widget> children;
+}
+
+class Padding extends Widget {
+  Padding({required this.child, this.padding = 0});
+
+  final double padding;
+  final Widget child;
+}
+
+class Text extends Widget {
+  Text(this.text);
+
+  final String text;
+}
+
+Widget buildWidgetTree() {
+  return Column(
+    children: <Widget>[
+      Text('Hello'),
+      Text('World!'),
+      Padding(child: Text('🌍')),
+    ],
+  );
 }
