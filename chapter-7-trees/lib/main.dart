@@ -9,6 +9,9 @@ void main() {
   print(searchResult1?.value); // ginger ale
   final searchResult2 = tree.search('water');
   print(searchResult2?.value); // null
+
+  print('\n--- Challenges ---');
+  challenge1();
 }
 
 TreeNode<String> makeBeverageTree() {
@@ -38,4 +41,22 @@ TreeNode<String> makeBeverageTree() {
   soda.add(gingerAle);
   soda.add(bitterLemon);
   return tree;
+}
+
+void challenge1() {
+  final one = TreeNode(1)
+    ..add(TreeNode(1))
+    ..add(TreeNode(5))
+    ..add(TreeNode(0));
+  final seventeen = TreeNode(17)..add(TreeNode(2));
+  final twenty = TreeNode(20)
+    ..add(TreeNode(5))
+    ..add(TreeNode(7));
+  final root = TreeNode(15)
+    ..add(one)
+    ..add(seventeen)
+    ..add(twenty);
+  root
+      .getChildrenAsListInLevels(root)
+      .forEach((list) => print(list.map((e) => e.value).join(' ')));
 }

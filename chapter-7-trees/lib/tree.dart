@@ -26,6 +26,31 @@ class TreeNode<T> {
     }
   }
 
+  List<List<TreeNode<T>>> getChildrenAsListInLevels(TreeNode<T> tree) {
+    final queue = QueueStack<TreeNode<T>>();
+    var nodesLeftInCurrentLevel = 0;
+
+    queue.enqueue(tree);
+
+    final result = <List<TreeNode<T>>>[];
+
+    while (!queue.isEmpty) {
+      nodesLeftInCurrentLevel = queue.length;
+      var list = <TreeNode<T>>[];
+      while (nodesLeftInCurrentLevel > 0) {
+        final node = queue.dequeue();
+        if (node == null) break;
+        list.add(node);
+        for (final element in node.children) {
+          queue.enqueue(element);
+        }
+        nodesLeftInCurrentLevel -= 1;
+      }
+      result.add(list);
+    }
+    return result;
+  }
+
   TreeNode<T>? search(T value) {
     TreeNode<T>? result;
     forEachLevelOrder((node) {
