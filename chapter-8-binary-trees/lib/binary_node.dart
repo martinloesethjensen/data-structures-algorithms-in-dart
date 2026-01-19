@@ -1,10 +1,23 @@
+import 'package:common/common.dart';
+
 typedef ActionCallback<T> = void Function(T value);
 
 class BinaryNode<T> {
   BinaryNode(this.value);
+
   final T value;
   BinaryNode<T>? leftChild;
   BinaryNode<T>? rightChild;
+
+  static BinaryNode<T>? deserialize<T>(List<T?> list) {
+    if (list.isEmpty) return null;
+    final value = list.removeAt(0);
+    if (value == null) return null;
+    final node = BinaryNode<T>(value);
+    node.leftChild = deserialize(list);
+    node.rightChild = deserialize(list);
+    return node;
+  }
 
   void traverseInOrder(ActionCallback<T> action) {
     leftChild?.traverseInOrder(action);
@@ -18,16 +31,36 @@ class BinaryNode<T> {
     rightChild?.traversePreOrder(action);
   }
 
+  void nullableTraversalPreOrder(ActionCallback<T?> action) {
+    action(value);
+    if (leftChild == null) {
+      action(null);
+    } else {
+      leftChild?.nullableTraversalPreOrder(action);
+    }
+    if (rightChild == null) {
+      action(null);
+    } else {
+      rightChild?.nullableTraversalPreOrder(action);
+    }
+  }
+
   void traversePostOrder(ActionCallback<T> action) {
     leftChild?.traversePostOrder(action);
     rightChild?.traversePostOrder(action);
     action(value);
   }
 
-  int getHeightOfTree([int value = -1]) {
-    final left = leftChild?.getHeightOfTree(value += 1) ?? value;
-    final right = rightChild?.getHeightOfTree(value += 1) ?? value;
-    return (left >= right) ? left : right;
+  int getHeightOfTree() {
+    final left = leftChild?.getHeightOfTree() ?? -1;
+    final right = rightChild?.getHeightOfTree() ?? -1;
+    return 1 + ((left >= right) ? left : right);
+  }
+
+  List<T?> serialize() {
+    final list = <T?>[];
+    nullableTraversalPreOrder(list.add);
+    return list;
   }
 
   @override

@@ -18,6 +18,9 @@ void main() {
   print(tree.getHeightOfTree());
 
   print('\n--- Challenge 2 ---');
+  final asList = tree.serialize();
+  print(asList);
+  print(BinaryNode.deserialize(asList));
 }
 
 BinaryNode<int> createBinaryTree() {
