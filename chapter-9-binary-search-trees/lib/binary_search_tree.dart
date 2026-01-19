@@ -18,12 +18,16 @@ class BinarySearchTree<E extends Comparable<dynamic>> {
   }
 
   bool contains(E element) {
-    if (root == null) return false;
-    var found = false;
-    root?.traverseInOrder((value) {
-      if (value == element) found = true;
-    });
-    return found;
+    var current = root;
+    while (current != null) {
+      if (current.value == element) return true;
+      if (element.compareTo(current.value) < 0) {
+        current = current.leftChild;
+      } else {
+        current = current.rightChild;
+      }
+    }
+    return false;
   }
 
   @override
