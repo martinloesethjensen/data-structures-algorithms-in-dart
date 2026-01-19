@@ -3,7 +3,7 @@ typedef ActionCallback<T> = void Function(T value);
 class BinaryNode<T> {
   BinaryNode(this.value);
 
-  final T value;
+  T value;
   BinaryNode<T>? leftChild;
   BinaryNode<T>? rightChild;
 
