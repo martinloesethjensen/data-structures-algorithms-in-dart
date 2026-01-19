@@ -18,6 +18,12 @@ class BinaryNode<T> {
     rightChild?.traversePreOrder(action);
   }
 
+  int getHeightOfTree([int value = -1]) {
+    final left = leftChild?.getHeightOfTree(value += 1) ?? value;
+    final right = rightChild?.getHeightOfTree(value += 1) ?? value;
+    return (left >= right) ? left : right;
+  }
+
   void traversePostOrder(ActionCallback<T> action) {
     leftChild?.traversePostOrder(action);
     rightChild?.traversePostOrder(action);
