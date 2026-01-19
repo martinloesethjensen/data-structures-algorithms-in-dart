@@ -3,10 +3,17 @@ import 'package:chapter_9_binary_search_trees/binary_search_tree.dart';
 void main() {
   final tree = buildExampleTree();
   print(tree);
-  if (tree.contains(5))
+  if (tree.contains(5)) {
     print('Contains 5');
-  else
+  } else {
     print('Does not contain 5');
+  }
+
+  print('Tree before removal:');
+  print(tree);
+  tree.remove(3);
+  print('Tree after removing root:');
+  print(tree);
 }
 
 BinarySearchTree<int> buildExampleTree() {
