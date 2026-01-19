@@ -9,15 +9,18 @@ class BinaryNode<T> {
   BinaryNode<T>? leftChild;
   BinaryNode<T>? rightChild;
 
-  static BinaryNode<T>? deserialize<T>(List<T?> list) {
+  static BinaryNode<T>? _deserialize<T>(List<T?> list) {
     if (list.isEmpty) return null;
-    final value = list.removeAt(0);
+    final value = list.removeLast();
     if (value == null) return null;
     final node = BinaryNode<T>(value);
     node.leftChild = deserialize(list);
     node.rightChild = deserialize(list);
     return node;
   }
+
+  static BinaryNode<T>? deserialize<T>(List<T?> list) =>
+      _deserialize(list.reversed.toList());
 
   void traverseInOrder(ActionCallback<T> action) {
     leftChild?.traverseInOrder(action);
