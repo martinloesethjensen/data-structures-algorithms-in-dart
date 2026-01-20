@@ -46,7 +46,10 @@ class AvlTree<E extends Comparable<dynamic>> {
     } else {
       node.rightChild = _remove(node.rightChild, value);
     }
-    return node;
+    final balancedNode = balanced(node);
+    balancedNode.height =
+        1 + math.max(balancedNode.leftHeight, balancedNode.rightHeight);
+    return balancedNode;
   }
 
   bool contains(E value) {
