@@ -24,4 +24,21 @@ class StringTrie {
     }
     return current.isTerminating;
   }
+
+  void remove(String text) {
+    var current = root;
+    for (var codeUnit in text.codeUnits) {
+      final child = current.children[codeUnit];
+      if (child == null) return;
+      current = child;
+    }
+    if (!current.isTerminating) return;
+    current.isTerminating = false;
+    while (current.parent != null &&
+        current.children.isEmpty &&
+        !current.isTerminating) {
+      current.parent?.children[current.key!] = null;
+      current = current.parent!;
+    }
+  }
 }
