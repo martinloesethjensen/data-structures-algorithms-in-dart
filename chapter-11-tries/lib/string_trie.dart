@@ -41,4 +41,31 @@ class StringTrie {
       current = current.parent!;
     }
   }
+
+  List<String> matchPrefix(String prefix) {
+    var current = root;
+    for (var codeUnit in prefix.codeUnits) {
+      final child = current.children[codeUnit];
+      if (child == null) return [];
+      current = child;
+    }
+    return _moreMatches(prefix, current);
+  }
+
+  List<String> _moreMatches(String prefix, TrieNode<int> node) {
+    // 1
+    List<String> results = [];
+    if (node.isTerminating) {
+      results.add(prefix);
+    }
+
+    // 2
+    for (final child in node.children.values) {
+      final codeUnit = child!.key!;
+      results.addAll(
+        _moreMatches('$prefix${String.fromCharCode(codeUnit)}', child),
+      );
+    }
+    return results;
+  }
 }
