@@ -1,10 +1,37 @@
 typedef ActionCallback<T> = void Function(T value);
 
-class AvlNode<T> {
+abstract class TraversableBinaryNode<T> {
+  T get value;
+  TraversableBinaryNode<T>? get leftChild;
+  TraversableBinaryNode<T>? get rightChild;
+
+  void traverseInOrder(ActionCallback<T> action) {
+    leftChild?.traverseInOrder(action);
+    action(value);
+    rightChild?.traverseInOrder(action);
+  }
+
+  void traversePreOrder(ActionCallback<T> action) {
+    action(value);
+    leftChild?.traversePreOrder(action);
+    rightChild?.traversePreOrder(action);
+  }
+
+  void traversePostOrder(ActionCallback<T> action) {
+    leftChild?.traversePostOrder(action);
+    rightChild?.traversePostOrder(action);
+    action(value);
+  }
+}
+
+class AvlNode<T> extends TraversableBinaryNode<T> {
   AvlNode(this.value);
 
+  @override
   T value;
+  @override
   AvlNode<T>? leftChild;
+  @override
   AvlNode<T>? rightChild;
 
   int height = 0;
