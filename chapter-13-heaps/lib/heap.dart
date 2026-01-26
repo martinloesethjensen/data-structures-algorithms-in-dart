@@ -2,11 +2,20 @@ enum Priority { max, min }
 
 class Heap<E extends Comparable<dynamic>> {
   Heap({List<E>? elements, this.priority = Priority.max}) {
-    this.elements = elements == null ? [] : elements;
+    this.elements = (elements == null) ? [] : elements;
+    _buildHeap();
   }
 
   late final List<E> elements;
   final Priority priority;
+
+  void _buildHeap() {
+    if (isEmpty) return;
+    final start = elements.length ~/ 2 - 1;
+    for (var i = start; i >= 0; i--) {
+      _siftDown(i);
+    }
+  }
 
   void insert(E value) {
     elements.add(value);

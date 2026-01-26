@@ -24,4 +24,19 @@ void main() {
 
   final indexOf = heap.indexOf(3);
   print(indexOf);
+
+  var maxHeap = Heap<int>(elements: [1, 12, 3, 4, 1, 6, 8, 7]);
+  print(maxHeap);
+  while (!maxHeap.isEmpty) {
+    print(maxHeap.remove());
+  }
+
+  var minHeap = Heap<int>(
+    elements: [1, 12, 3, 4, 1, 6, 8, 7],
+    priority: Priority.min,
+  );
+  print(minHeap);
+  while (!minHeap.isEmpty) {
+    print(minHeap.remove());
+  }
 }
