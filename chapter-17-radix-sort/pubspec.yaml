@@ -1,0 +1,11 @@
+name: chapter_17_radix_sort
+description: A new Dart project.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.10.4
+
+dependencies:
+  common:
+    path: ../common
