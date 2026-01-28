@@ -1,7 +1,11 @@
 import 'package:chapter_20_graphs/graph.dart';
 
 void main() {
-  final graph = AdjacencyList<String>();
+  printGraph(AdjacencyList<String>());
+  printGraph(AdjacencyMatrix<String>());
+}
+
+void printGraph(Graph graph) {
   final singapore = graph.createVertex('Singapore');
   final tokyo = graph.createVertex('Tokyo');
   final hongKong = graph.createVertex('Hong Kong');
