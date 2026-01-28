@@ -3,6 +3,7 @@ import 'package:chapter_20_graphs/graph.dart';
 void main() {
   printGraph(AdjacencyList<String>());
   printGraph(AdjacencyMatrix<String>());
+  challenge1();
 }
 
 void printGraph(Graph graph) {
@@ -36,4 +37,39 @@ void printGraph(Graph graph) {
   for (final edge in graph.edges(sanFrancisco)) {
     print('${edge.source} to ${edge.destination}');
   }
+}
+
+void challenge1() {
+  final graph = AdjacencyList<String>();
+  final megan = graph.createVertex('Megan');
+  final sandra = graph.createVertex('Sandra');
+  final pablo = graph.createVertex('Pablo');
+  final edith = graph.createVertex('Edith');
+  final ray = graph.createVertex('Ray');
+  final luke = graph.createVertex('Luke');
+  final vicky = graph.createVertex('Vicki');
+  final manda = graph.createVertex('Manda');
+  graph.addEdge(megan, sandra);
+  graph.addEdge(megan, pablo);
+  graph.addEdge(megan, edith);
+  graph.addEdge(pablo, ray);
+  graph.addEdge(pablo, luke);
+  graph.addEdge(edith, manda);
+  graph.addEdge(edith, vicky);
+  graph.addEdge(manda, pablo);
+  graph.addEdge(manda, megan);
+  print(graph);
+
+  final p = graph.edges(pablo);
+  final m = graph.edges(megan);
+  final common = innerJoin(p, m);
+  common.forEach((e) => print(e.destination));
+}
+
+List<Edge<String>> innerJoin(
+  List<Edge<String>> listA,
+  List<Edge<String>> listB,
+) {
+  final setB = listB.map((e) => e.destination).toSet();
+  return listA.where((edge) => setB.contains(edge.destination)).toList();
 }
