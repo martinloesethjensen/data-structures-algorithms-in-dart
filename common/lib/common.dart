@@ -7,3 +7,4 @@ export 'src/ring_buffer.dart';
 export 'src/queue.dart';
 export 'src/graph.dart';
 export 'src/stack.dart';
+export 'src/priority_queue.dart';
