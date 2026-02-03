@@ -3,6 +3,13 @@ import 'package:chapter_11_tries/trie_node.dart';
 class StringTrie {
   TrieNode<int> root = TrieNode();
 
+  Set<String> _set = {};
+  Set<String> get allStrings => _set;
+
+  int get length => _set.length;
+
+  bool get isEmpty => _set.isEmpty;
+
   void insert(String text) {
     var current = root;
     for (var codeUnit in text.codeUnits) {
@@ -13,6 +20,7 @@ class StringTrie {
       current = child;
     }
     current.isTerminating = true;
+    _set.add(text);
   }
 
   bool contains(String text) {
@@ -40,6 +48,7 @@ class StringTrie {
       current.parent?.children[current.key!] = null;
       current = current.parent!;
     }
+    _set.remove(text);
   }
 
   List<String> matchPrefix(String prefix) {
@@ -53,13 +62,10 @@ class StringTrie {
   }
 
   List<String> _moreMatches(String prefix, TrieNode<int> node) {
-    // 1
     List<String> results = [];
     if (node.isTerminating) {
       results.add(prefix);
     }
-
-    // 2
     for (final child in node.children.values) {
       final codeUnit = child!.key!;
       results.addAll(
