@@ -6,3 +6,4 @@ export 'src/heap.dart';
 export 'src/ring_buffer.dart';
 export 'src/queue.dart';
 export 'src/graph.dart';
+export 'src/stack.dart';
