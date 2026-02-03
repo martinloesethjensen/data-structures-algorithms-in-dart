@@ -29,6 +29,24 @@ extension DepthFirstSearch<E> on Graph<E> {
     }
     return visited;
   }
+
+  List<Vertex<E>> dfs(Vertex<E> source) {
+    final pushed = <Vertex<E>>{};
+    final visited = <Vertex<E>>[];
+    _dfs(source, pushed, visited);
+    return visited;
+  }
+
+  void _dfs(Vertex<E> source, Set<Vertex<E>> pushed, List<Vertex<E>> visited) {
+    pushed.add(source);
+    visited.add(source);
+    final neighbors = edges(source);
+    for (final edge in neighbors) {
+      if (!pushed.contains(edge.destination)) {
+        _dfs(edge.destination, pushed, visited);
+      }
+    }
+  }
 }
 
 extension CyclicGraph<E> on Graph<E> {

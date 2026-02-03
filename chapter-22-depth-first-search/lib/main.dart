@@ -24,6 +24,30 @@ void main() {
   vertices.forEach(print);
 
   cyclicExample();
+
+  // Challenge 1
+  //
+  // For each of the following two examples, which traversal, depth-first or breadth-first,
+  // is better for discovering if a path exists between the two nodes? Explain why.
+  //
+  // A - B - C - D - F - H
+  // |
+  // G
+  //
+  // * Path from A to F:
+  // For this path a DFS would be best at discorvering the path.
+  // It is simply because A first goes down the B edges and will continue.
+  // Thereby eliminating the step to check for A's other neighbor.
+  //
+  // * Path from A to G:
+  // This is best for BFS because that search checks for all of A's neighbors.
+  // It will find the path to G in the second step where DFS would traverse more vertercies before reaching G.
+
+  // Challenge 2
+  // Recursive DFS
+  print('🔁');
+  final verticesRec = graph.dfs(a);
+  verticesRec.forEach(print);
 }
 
 void cyclicExample() {
