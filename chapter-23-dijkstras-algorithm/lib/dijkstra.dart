@@ -17,12 +17,14 @@ class Pair<T> implements Comparable<Pair<T>> {
   String toString() => '($distance, $vertex)';
 }
 
+typedef Paths<E> = Map<Vertex<E>, Pair<E>?>;
+
 class Dijkstra<E> {
   Dijkstra(this.graph);
 
   final Graph<E> graph;
 
-  Map<Vertex<E>, Pair<E>?> shortestPaths(Vertex<E> source) {
+  Paths<E> shortestPaths(Vertex<E> source) {
     final queue = PriorityQueue<Pair<E>>(priority: Priority.min);
     final visited = <Vertex<E>>{};
     final paths = <Vertex<E>, Pair<E>?>{};
@@ -56,5 +58,33 @@ class Dijkstra<E> {
     }
 
     return paths;
+  }
+
+  List<Vertex<E>> shortestPath(
+    Vertex<E> source,
+    Vertex<E> destination, {
+    Paths<E>? paths,
+  }) {
+    final allPaths = paths ?? shortestPaths(source);
+    if (!allPaths.containsKey(destination)) return [];
+    var current = destination;
+    final path = <Vertex<E>>[current];
+    while (current != source) {
+      final previous = allPaths[current]?.vertex;
+      if (previous == null) return [];
+      path.add(previous);
+      current = previous;
+    }
+    return path.reversed.toList();
+  }
+
+  Map<Vertex<E>, List<Vertex<E>>> shortestPathsLists(Vertex<E> source) {
+    final result = <Vertex<E>, List<Vertex<E>>>{};
+    final allPaths = shortestPaths(source);
+    for (final vertex in graph.vertices) {
+      final path = shortestPath(source, vertex, paths: allPaths);
+      result[vertex] = path;
+    }
+    return result;
   }
 }

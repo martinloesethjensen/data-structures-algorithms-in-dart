@@ -28,4 +28,19 @@ void main() {
   final dijkstra = Dijkstra(graph);
   final allPaths = dijkstra.shortestPaths(a);
   print(allPaths);
+  final path = dijkstra.shortestPath(a, d);
+  print(path);
+
+  // Challenges
+  //
+  // --- Challenge 1 ---
+  // Starting from vertex A
+  // Path to B: A --1-> B
+  // Path to C: A --1-> B --8-> C
+  // Path to D: A --1-> B --9-> D
+  // Path to E: A --1-> B --9-> D --2-> E
+  //
+  // --- Challenge 2 ---
+  final verticesShortestPaths = dijkstra.shortestPathsLists(a);
+  print(verticesShortestPaths);
 }
