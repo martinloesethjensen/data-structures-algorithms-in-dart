@@ -1,3 +1,5 @@
+import 'package:common/common.dart';
+
 List<E> quicksortNaive<E extends Comparable<dynamic>>(List<E> list) {
   if (list.length < 2) return list;
   final pivot = list[0];
@@ -152,4 +154,30 @@ void quicksortDutchFlag<E extends Comparable<dynamic>>(
   final middle = _partitionDutchFlag(list, low, high);
   quicksortDutchFlag(list, low, middle.low - 1);
   quicksortDutchFlag(list, middle.high + 1, high);
+}
+
+void quicksortDutchFlagIterative<E extends Comparable<dynamic>>(
+  List<E> list,
+  int low,
+  int high,
+) {
+  final stack = Stack<Range>();
+  stack.push(Range(low, high));
+  while (stack.isNotEmpty) {
+    final range = stack.pop()!;
+    if (range.low >= range.high) continue;
+    final middle = _partitionDutchFlag(list, range.low, range.high);
+
+    final leftSize = middle.low - 1 - range.low;
+    final rightSize = range.high - (middle.high + 1);
+
+    // Push larger first to achieve O(log n) instead of O(n)
+    if (leftSize > rightSize) {
+      stack.push(Range(range.low, middle.low - 1));
+      stack.push(Range(middle.high + 1, range.high));
+    } else {
+      stack.push(Range(middle.high + 1, range.high));
+      stack.push(Range(range.low, middle.low - 1));
+    }
+  }
 }
